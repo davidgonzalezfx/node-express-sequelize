@@ -21,11 +21,9 @@
 	},
 	"devDependencies": {
 		"chai": "^4.2.0",
-		"chai-http": "^4.3.0",
 		"mocha": "^8.1.3",
 		"node-fetch": "^2.6.0",
 		"nodemon": "^2.0.4",
-		"sequelize-auto": "^0.5.4",
-		"supertest": "^4.0.2"
+		"sequelize-auto": "^0.5.4"
 	}
 }

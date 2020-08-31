@@ -21,7 +21,7 @@ sequelize
 	.then(() =>
 		console.log('\x1b[36m%s\x1b[0m', 'Connection has been established successfully.', '\x1b[0m')
 	)
-	.catch((err) => console.error('Unable to connect to the database:', err))
+	.catch((err) => console.error('Unable to connect to the database:\n', err))
 
 wareHouse = wareHouse(sequelize)
 warehouseDescription = warehouseDescription(sequelize)

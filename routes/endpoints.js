@@ -1,10 +1,17 @@
+/* ==================================================== */
+/* IMPORTS */
+/* ==================================================== */
 const router = require('express').Router()
 const controller = require('../controllers/warehouse.controller')
 
+
+/* ==================================================== */
+/* ROUTES, METHODS AND ACTIONS */
+/* ==================================================== */
 router.get('/', (req, res) => {
 	res.json({
 		status: 'API Its Working',
-		message: 'List of favorite websites'
+		message: 'Go to /warehouses to get a list of all warehouses'
 	})
 })
 

@@ -1,11 +1,14 @@
-// PLEASE RUN SERVER BEFORE TESTS [npm run dev]
+/* ==================================================== */
+/* IMPORTS */
+/* PLEASE RUN SERVER (IN ANOTHER TERMINAL) BEFORE TESTS [npm run dev] */
+/* ==================================================== */
 const expect = require('chai').expect
 const fetch = require('node-fetch')
 
 const SERVER = 'http://192.168.1.57:3000/api'
 
-describe('/warehouses requests', function () {
-	it('GET /warehouses should return all warehouses in database', async () => {
+describe('/api/warehouses requests', function () {
+	it('GET /api/warehouses should return all warehouses in database', async () => {
 		const response = await fetch(SERVER + '/warehouses')
 		expect(response.status).to.be.equal(200)
 
@@ -14,9 +17,10 @@ describe('/warehouses requests', function () {
 		expect(warehouses.status).to.be.a('String')
 		expect(warehouses.warehouses).to.be.a('Array')
 	})
-	it('POST /warehouses should create new warehouse in database', async () => {
+
+	it('POST /api/warehouses should create new warehouse in database', async () => {
 		const data = {
-			"name": "FROM MOCHA",
+			"name": "test_post_method",
 			"headquartersNumber": 999,
 			"description": [
 				{
@@ -50,9 +54,9 @@ describe('/warehouses requests', function () {
 })
 
 
-describe('/warehouse/:id requests', function () {
+describe('/api/warehouse/:id requests', function () {
 	const data = {
-		"name": "FROM MOCHA GET id",
+		"name": "test_instance",
 		"headquartersNumber": 999,
 		"description": [
 			{
@@ -86,7 +90,7 @@ describe('/warehouse/:id requests', function () {
 		catch (e) { }
 	});
 
-	it('GET /warehouse/:id should return warehouse #id instance ', async () => {
+	it('GET /api/warehouse/:id should return warehouse instance ', async () => {
 
 		const response = await fetch(SERVER + `/warehouse/${id}`)
 		expect(response.status).to.be.equal(200)
@@ -100,7 +104,8 @@ describe('/warehouse/:id requests', function () {
 		expect(instance.warehouse.description.city).to.be.equal(data.description.city);
 		expect(instance.warehouse.description.address).to.be.equal(data.description.address);
 	})
-	it('PUT /warehouse/:id should create new warehouse in database', async () => {
+
+	it('PUT /api/warehouse/:id should update warehouse instance in database', async () => {
 		const response = await fetch(SERVER + `/warehouse/${id}`, {
 			method: 'PUT',
 			headers: {
@@ -121,7 +126,8 @@ describe('/warehouse/:id requests', function () {
 		expect(instance.warehouse.description.city).to.be.equal(data.description.city);
 		expect(instance.warehouse.description.address).to.be.equal(data.description.address);
 	})
-	it('DELETE /warehouse/:id should delete warehouse #id instance', async () => {
+
+	it('DELETE /api/warehouse/:id should delete warehouse instance', async () => {
 		const responseDelete = await fetch(SERVER + `/warehouse/${id}`, {
 			method: 'DELETE'
 		})
@@ -141,8 +147,8 @@ describe('/warehouse/:id requests', function () {
 	})
 })
 
-describe('/warehouse/:id errors', function () {
-	it('GET /warehouse/:id that does not exists', async () => {
+describe('/api/warehouse/:id errors', function () {
+	it('GET /api/warehouse/:id to instance that does not exists', async () => {
 		const response = await fetch(SERVER + `/warehouse/00001`)
 		expect(response.status).to.be.equal(400)
 
@@ -151,7 +157,8 @@ describe('/warehouse/:id errors', function () {
 		expect(res.status).to.be.equal('Error while retrieving information from database');
 		expect(res.error).to.be.equal('Instance not found');
 	})
-	it('GET /warehouse/:id that does not exists', async () => {
+
+	it('PUT /api/warehouse/:id to instance that does not exists', async () => {
 		const response = await fetch(SERVER + `/warehouse/00001`, {
 			method: 'PUT',
 			headers: {
@@ -168,7 +175,8 @@ describe('/warehouse/:id errors', function () {
 		expect(res.status).to.be.equal('Error while retrieving information from database');
 		expect(res.error).to.be.equal('Instance not found');
 	})
-	it('DELETE /warehouse/:id that does not exists', async () => {
+
+	it('DELETE /warehouse/:id to instance that does not exists', async () => {
 		const response = await fetch(SERVER + `/warehouse/00001`, {
 			method: 'DELETE'
 		})
