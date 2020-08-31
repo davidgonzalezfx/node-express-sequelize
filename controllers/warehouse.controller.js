@@ -31,6 +31,10 @@ wareHouse.hasMany(warehouseDescription, {
 	foreignKey: 'warehouse_id'
 })
 
+warehouseDescription.belongsTo(wareHouse, {
+	foreignKey: 'id'
+})
+
 /* ==================================================== */
 /* CRUD OPERATIONS */
 /* ==================================================== */
