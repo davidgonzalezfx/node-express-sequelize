@@ -12,7 +12,8 @@ let warehouseDescription = require('../models/warehouse_description')
 sequelize = new Sequelize(process.env.DB, process.env.DBUSER, process.env.PASSWD, {
 	host: process.env.HOST,
 	port: process.env.DBPORT,
-	dialect: 'mysql'
+	dialect: 'mysql',
+	logging: false
 })
 
 sequelize
@@ -135,7 +136,7 @@ exports.update = async (req, res) => {
 				.catch((err) => console.log(err))
 		})
 		.catch((err) => {
-			res.status(500).send({
+			res.status(400).send({
 				status: 'Error while retrieving information from database',
 				error: err.message
 			})
